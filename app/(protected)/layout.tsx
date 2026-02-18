@@ -8,22 +8,21 @@ export default async function ProtectedLayout({
 }: {
   children: ReactNode
 }) {
-  // Server Component: check session and redirect if unauthenticated
   const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Redirect to login if not authenticated
-  // Note: Middleware also handles this, but this provides an extra check
   if (!user) {
     redirect('/login')
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <ProtectedHeader />
-      <main className="container py-6">{children}</main>
-    </>
+      <div className="py-10">
+        {children}
+      </div>
+    </div>
   )
 }

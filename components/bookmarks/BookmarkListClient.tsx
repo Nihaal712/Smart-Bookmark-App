@@ -108,31 +108,13 @@ export function BookmarkList({
         const onDelete = (
           payload: RealtimePostgresChangesPayload<Bookmark>
         ) => {
-          // DELETE events use payload.old (never payload.new)
           const deleted = payload.old as Partial<Bookmark> | null;
-          
-          // Debug logging to verify DELETE events are received
-          console.log("[Realtime DELETE]", { deleted, payload, hasId: !!deleted?.id, hasUserId: !!deleted?.user_id });
-          
-          // Extract ID from payload.old - this should always be present
-          if (!deleted || !deleted.id) {
-            console.warn("[Realtime DELETE] Missing deleted.id", payload);
-            return;
-          }
-          
-          const deletedId = deleted.id;
-          
-          // Filter by user_id if present (some DELETE payloads may only include primary key)
-          // If user_id is missing, rely on RLS filtering (Supabase only sends events for rows user can access)
-          if (deleted.user_id && deleted.user_id !== userId) {
-            console.log("[Realtime DELETE] Ignoring delete for different user", deleted.user_id);
-            return;
-          }
-          
-          console.log("[Realtime DELETE] Removing bookmark", deletedId);
-          
-          // Remove from local state using the ID from payload.old
-          setBookmarks((prev) => prev.filter((b) => b.id !== deletedId));
+
+          if (!deleted?.id) return;
+
+          setBookmarks((prev) =>
+            prev.filter((b) => b.id !== deleted.id)
+          );
         };
 
         channel
@@ -281,14 +263,14 @@ export function BookmarkList({
   };
 
   return (
-    <section className="space-y-6">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h2 className="text-2xl font-semibold tracking-tight">Bookmarks</h2>
-          <p className="text-sm text-muted-foreground">
-            Your saved links, synced across tabs in realtime.
-          </p>
-        </div>
+    <section className="mx-auto max-w-6xl space-y-8 px-4">
+      <div className="flex flex-col items-center gap-2 text-center">
+        <h2 className="text-4xl font-semibold tracking-tight">
+          Bookmarks
+        </h2>
+        <p className="text-lg text-muted-foreground">
+          Your saved links, synced across tabs in realtime.
+        </p>
         {!realtimeOk && (
           <button
             type="button"
@@ -300,7 +282,7 @@ export function BookmarkList({
         )}
       </div>
 
-      <div className="w-full sm:max-w-2xl">
+      <div className="mx-auto w-full sm:max-w-2xl text-center">
         <BookmarkForm onSubmitUrl={handleCreateOptimistic} />
         <p className="mt-2 text-xs text-muted-foreground">
           Shortcuts: <kbd className="rounded border px-1 text-[10px]">/</kbd> to focus URL,{" "}
@@ -322,13 +304,13 @@ export function BookmarkList({
           </p>
         </div>
       ) : (
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="mx-auto flex max-w-6xl flex-wrap justify-center gap-4">
           {bookmarks.map((b) => (
             <li
               key={b.id}
               data-bookmark-id={b.id}
               tabIndex={0}
-              className="h-full rounded-lg motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-2 motion-safe:duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)] xl:w-[calc(25%-1rem)] rounded-lg motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-top-2 motion-safe:duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <BookmarkItem
                 bookmark={b}

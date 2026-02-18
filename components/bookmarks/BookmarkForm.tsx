@@ -20,7 +20,7 @@ export function BookmarkForm({
 
   return (
     <form
-      className="flex gap-2"
+      className="mx-auto flex w-full max-w-2xl justify-center gap-2"
       onSubmit={async (e) => {
         e.preventDefault();
         if (!url.trim()) return;

@@ -22,8 +22,11 @@ export default async function BookmarksPage() {
   const initialBookmarks: Bookmark[] = !error && data ? (data as Bookmark[]) : [];
 
   return (
-    <main>
-      <BookmarkList initialBookmarks={initialBookmarks} userId={user.id} />
+    <main className="min-h-screen">
+      <BookmarkList
+        initialBookmarks={initialBookmarks}
+      userId={user.id}
+      />
     </main>
   );
 }

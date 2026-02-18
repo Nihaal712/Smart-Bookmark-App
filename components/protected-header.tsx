@@ -20,8 +20,10 @@ export function ProtectedHeader() {
   if (loading) {
     return (
       <header className="border-b bg-background">
-        <div className="container flex h-16 items-center justify-between px-4">
-          <h1 className="text-xl font-semibold">Smart Bookmark App</h1>
+        <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-end px-4">
+          <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-semibold">
+            Smart Bookmark App
+          </h1>
           <Loader2 className="h-4 w-4 animate-spin" />
         </div>
       </header>
@@ -30,8 +32,10 @@ export function ProtectedHeader() {
 
   return (
     <header className="border-b bg-background">
-      <div className="container flex h-16 items-center justify-between px-4">
-        <h1 className="text-xl font-semibold">Smart Bookmark App</h1>
+      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-end px-4">
+        <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-semibold">
+          Smart Bookmark App
+        </h1>
         <div className="flex items-center gap-4">
           {user && (
             <>
