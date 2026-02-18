@@ -3,74 +3,74 @@
 ## 0. Overall Architecture
 
 ### Folder Structure
-- [ ] Create Next.js App Router structure with `app/` directory
-- [ ] Set up `app/(auth)/` route group for login page
-- [ ] Set up `app/(protected)/` route group for authenticated routes
-- [ ] Create `app/(protected)/bookmarks/` for main bookmark list page
-- [ ] Create `components/ui/` for shadcn/ui components
-- [ ] Create `components/bookmarks/` for bookmark-specific components
-- [ ] Create `lib/supabase/` for Supabase client utilities
-- [ ] Create `lib/utils.ts` for shared utilities (cn helper)
-- [ ] Create `actions/` directory for Server Actions
-- [ ] Create `types/` directory for TypeScript definitions
-- [ ] Create `hooks/` directory for custom React hooks (realtime subscription)
+- [x] Create Next.js App Router structure with `app/` directory
+- [x] Set up `app/(auth)/` route group for login page
+- [x] Set up `app/(protected)/` route group for authenticated routes
+- [x] Create `app/(protected)/bookmarks/` for main bookmark list page
+- [x] Create `components/ui/` for shadcn/ui components
+- [x] Create `components/bookmarks/` for bookmark-specific components
+- [x] Create `lib/supabase/` for Supabase client utilities
+- [x] Create `lib/utils.ts` for shared utilities (cn helper)
+- [x] Create `actions/` directory for Server Actions
+- [x] Create `types/` directory for TypeScript definitions
+- [x] Create `hooks/` directory for custom React hooks (realtime subscription)
 
 ### Client vs Server Component Boundaries
-- [ ] Root layout (`app/layout.tsx`) - Server Component (theme provider wrapper)
-- [ ] Auth layout (`app/(auth)/layout.tsx`) - Server Component
-- [ ] Protected layout (`app/(protected)/layout.tsx`) - Server Component (session check)
-- [ ] Login page (`app/(auth)/login/page.tsx`) - Server Component (redirect if authenticated)
-- [ ] Bookmarks page (`app/(protected)/bookmarks/page.tsx`) - Server Component (initial data fetch)
-- [ ] BookmarkList component - Client Component (realtime subscription, optimistic updates)
-- [ ] BookmarkForm component - Client Component (form state, validation)
-- [ ] BookmarkItem component - Client Component (delete interaction)
-- [ ] ThemeProvider wrapper - Client Component (next-themes requires client)
+- [x] Root layout (`app/layout.tsx`) - Server Component (theme provider wrapper)
+- [x] Auth layout (`app/(auth)/layout.tsx`) - Server Component
+- [x] Protected layout (`app/(protected)/layout.tsx`) - Server Component (session check)
+- [x] Login page (`app/(auth)/login/page.tsx`) - Server Component (redirect if authenticated)
+- [x] Bookmarks page (`app/(protected)/bookmarks/page.tsx`) - Server Component (initial data fetch)
+- [x] BookmarkList component - Client Component (realtime subscription, optimistic updates)
+- [x] BookmarkForm component - Client Component (form state, validation)
+- [x] BookmarkItem component - Client Component (delete interaction)
+- [x] ThemeProvider wrapper - Client Component (next-themes requires client)
 
 ### Server Actions Usage
-- [ ] `actions/bookmarks.ts` - createBookmark, deleteBookmark Server Actions
-- [ ] Server Actions use Supabase server client (no client-side Supabase client for mutations)
-- [ ] Server Actions include proper error handling and return typed responses
-- [ ] Server Actions validate user session before any database operations
-- [ ] Note: Realtime subscriptions and client state are the primary update mechanism
-- [ ] Optional: Use `revalidatePath` if server-rendered data caching is relied upon
+- [x] `actions/bookmarks.ts` - createBookmark, deleteBookmark Server Actions
+- [x] Server Actions use Supabase server client (no client-side Supabase client for mutations)
+- [x] Server Actions include proper error handling and return typed responses
+- [x] Server Actions validate user session before any database operations
+- [x] Note: Realtime subscriptions and client state are the primary update mechanism
+- [x] Optional: Use `revalidatePath` if server-rendered data caching is relied upon
 
 ## 1. Project Initialization
 
 ### Next.js Setup
-- [ ] Initialize Next.js project with `npx create-next-app@latest` (TypeScript, App Router, Tailwind CSS, ESLint)
-- [ ] Verify `tsconfig.json` has strict mode enabled
-- [ ] Verify `tailwind.config.ts` is properly configured
-- [ ] Verify `postcss.config.js` exists for Tailwind processing
-- [ ] Configure `next.config.js` for image domains (if needed for favicon fetching)
+- [x] Initialize Next.js project with `npx create-next-app@latest` (TypeScript, App Router, Tailwind CSS, ESLint)
+- [x] Verify `tsconfig.json` has strict mode enabled
+- [x] Verify `tailwind.config.ts` is properly configured
+- [x] Verify `postcss.config.js` exists for Tailwind processing
+- [x] Configure `next.config.js` for image domains (if needed for favicon fetching)
 
 ### shadcn/ui Initialization
-- [ ] Run `npx shadcn@latest init` with TypeScript, Tailwind, default style
-- [ ] Install required shadcn/ui components:
-  - [ ] `button` - for actions (add, delete)
-  - [ ] `input` - for URL input field
-  - [ ] `card` - for bookmark item display
-  - [ ] `skeleton` - for loading states
-  - [ ] `toast` (via sonner) - for notifications
-  - [ ] `dialog` or `alert-dialog` - for delete confirmation
-- [ ] Verify `components.json` is created with correct paths
+- [x] Run `npx shadcn@latest init` with TypeScript, Tailwind, default style
+- [x] Install required shadcn/ui components:
+  - [x] `button` - for actions (add, delete)
+  - [x] `input` - for URL input field
+  - [x] `card` - for bookmark item display
+  - [x] `skeleton` - for loading states
+  - [x] `toast` (via sonner) - for notifications
+  - [x] `dialog` or `alert-dialog` - for delete confirmation
+- [x] Verify `components.json` is created with correct paths
 
 ### Dependency Installation
-- [ ] Install `@supabase/ssr` - cookie-based auth for App Router
-- [ ] Install `@supabase/supabase-js` - Supabase client library
-- [ ] Install `cheerio` - server-side HTML parsing for metadata extraction
-- [ ] Install `sonner` - toast notification library
-- [ ] Install `lucide-react` - icon library
-- [ ] Install `next-themes` - dark mode support
-- [ ] Install `zod` - schema validation (if not included with shadcn)
-- [ ] Install `@types/node` and `@types/react` (if not auto-installed)
-- [ ] Verify all dependencies are compatible with Next.js 14+ App Router
+- [x] Install `@supabase/ssr` - cookie-based auth for App Router
+- [x] Install `@supabase/supabase-js` - Supabase client library
+- [x] Install `cheerio` - server-side HTML parsing for metadata extraction
+- [x] Install `sonner` - toast notification library
+- [x] Install `lucide-react` - icon library
+- [x] Install `next-themes` - dark mode support
+- [x] Install `zod` - schema validation (if not included with shadcn)
+- [x] Install `@types/node` and `@types/react` (if not auto-installed)
+- [x] Verify all dependencies are compatible with Next.js 14+ App Router
 
 ## 2. Supabase Configuration
 
 ### Project Creation
-- [ ] Create new Supabase project at supabase.com
-- [ ] Note project URL and anon key for environment variables
-- [ ] Enable Row Level Security on all tables by default
+- [x] Create new Supabase project at supabase.com
+- [x] Note project URL and anon key for environment variables
+- [x] Enable Row Level Security on all tables by default
 
 ### Google OAuth Setup
 - [x] Create Google Cloud Console project
@@ -119,7 +119,7 @@
   - Operation: DELETE
   - Expression: `auth.uid() = user_id`
 - [x] Verify no UPDATE policy exists (bookmarks are immutable after creation)
-- [ ] Test RLS policies using Supabase SQL editor with test queries
+- [x] Test RLS policies using Supabase SQL editor with test queries
   - **Migration:** `supabase/migrations/20250218000002_bookmarks_rls.sql`
 
 ### Realtime Replication Setup
@@ -248,9 +248,9 @@
 ### Client Component Responsibilities
 - [x] BookmarkList component manages local state for bookmarks array
 - [x] Component fetches initial data via props from Server Component parent
-- [ ] Component sets up Realtime subscription on mount
+- [x] Component sets up Realtime subscription on mount
 - [x] Component handles optimistic updates for user actions
-- [ ] Component reconciles Realtime events with local state
+- [x] Component reconciles Realtime events with local state
 
 ### Loading States
 - [x] Show skeleton loaders while initial data loads
@@ -299,7 +299,7 @@
 - [x] Always call `subscription.unsubscribe()` in cleanup
 - [x] Remove event listeners before component unmount
 - [x] Clear any timers or intervals related to Realtime
-- [ ] Verify no orphaned subscriptions in browser DevTools
+- [x] Verify no orphaned subscriptions in browser DevTools
 
 ### Optimistic UI Strategy
 - [x] When user creates bookmark → immediately add to local state with temporary ID
@@ -322,11 +322,11 @@
 - [x] Match optimistic updates by URL when ID reconciliation is needed
 
 ### Multi-Tab Consistency Guarantees
-- [ ] Each tab maintains independent subscription
-- [ ] Realtime events broadcast to all tabs simultaneously
-- [ ] All tabs receive same events (Supabase handles this)
-- [ ] Test with 2+ tabs open, verify changes sync across tabs
-- [ ] Verify no infinite loops when one tab updates trigger other tabs
+- [x] Each tab maintains independent subscription
+- [x] Realtime events broadcast to all tabs simultaneously
+- [x] All tabs receive same events (Supabase handles this)
+- [x] Test with 2+ tabs open, verify changes sync across tabs
+- [x] Verify no infinite loops when one tab updates trigger other tabs
 
 ### How Optimistic Inserts Reconcile with Realtime Payloads
 - [x] Optimistic insert uses temporary ID (e.g., `temp-${Date.now()}`)
@@ -357,7 +357,7 @@
 ### Authorization Checks
 - [x] Server Action checks user session before delete (see Section 2 Security Considerations)
 - [x] RLS policy ensures users can only delete own bookmarks
-- [ ] Verify RLS policy is working (test with SQL editor)
+- [x] Verify RLS policy is working (test with SQL editor)
 
 ### UI Confirmation Flow
 - [x] Show confirmation dialog before delete (shadcn/ui AlertDialog)
@@ -386,7 +386,7 @@
 
 ### Animations
 - [x] Add fade-in animation for new bookmark items (CSS transitions)
-- [ ] Add fade-out animation for deleted items
+- [x] Add fade-out animation for deleted items
 - [x] Use Tailwind `transition` and `animate` utilities
 - [x] Keep animations lightweight (< 300ms)
 - [x] Ensure animations don't block user interactions
@@ -412,10 +412,10 @@
 ### GitHub Repository Setup
 - [x] Initialize git repository (`git init`)
 - [x] Create `.gitignore` (include `.env.local`, `node_modules`, `.next`)
-- [ ] Create initial commit with project setup
-- [ ] Create GitHub repository
-- [ ] Push code to GitHub (main/master branch)
-- [ ] Verify repository is public or has Vercel access
+- [x] Create initial commit with project setup
+- [x] Create GitHub repository
+- [x] Push code to GitHub (main/master branch)
+- [x] Verify repository is public or has Vercel access
 
 ### Vercel Deployment Steps
 - [ ] Sign in to Vercel with GitHub account

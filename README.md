@@ -2,6 +2,11 @@
 
 A modern bookmark manager built with Next.js, Supabase, and Tailwind CSS. Features Google OAuth authentication, real-time updates, and smart auto-title fetching.
 
+## About the Documentation
+
+This repository includes a `TASKS.md` and additional docs created as part of the assignment to demonstrate planning, architecture decisions, and security considerations (OAuth, RLS, Realtime).  
+In a production team setting, this would typically live in internal docs rather than the public repo.
+
 ## Tech Stack
 
 - **Framework:** Next.js 15 (App Router)
