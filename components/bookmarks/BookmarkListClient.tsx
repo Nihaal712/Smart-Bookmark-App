@@ -84,7 +84,7 @@ export function BookmarkList({
           payload: RealtimePostgresChangesPayload<Bookmark>
         ) => {
           // INSERT events use payload.new
-          const row = payload.new;
+          const row = payload.new as Bookmark | null;
           if (!row?.id || row.user_id !== userId) return;
 
           setBookmarks((prev) => {
