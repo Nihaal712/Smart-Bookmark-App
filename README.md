@@ -1,6 +1,6 @@
 # Smart Bookmark App
 
-A modern, realtime social bookmarking manager built with **Next.js 15** and **Supabase**. Features instant cross-device syncing, optimistic UI updates, and intelligent metadata fetching.
+A modern, realtime smart bookmarking app built with **Next.js 15** and **Supabase**. Features instant cross-device syncing, optimistic UI updates, and intelligent metadata fetching.
 
 ## About the Documentation
 
@@ -32,8 +32,8 @@ In a production team setting, this would typically live in internal docs rather 
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/yourusername/smart-bookmark-app.git
-cd smart-bookmark-app
+git clone https://github.com/Nihaal712/Smart-Bookmark-App.git
+cd Smart-Bookmark-App
 npm install
 ```
 
@@ -45,34 +45,21 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 ### 3. Supabase Setup
-Run the following SQL in your Supabase SQL Editor to set up the schema and RLS:
 
-```sql
--- Create table
-create table bookmarks (
-  id uuid default gen_random_uuid() primary key,
-  user_id uuid references auth.users(id) not null,
-  url text not null,
-  title text not null,
-  created_at timestamptz default now()
-);
+The Supabase database schema, Row Level Security (RLS) policies, and Realtime configuration are defined in SQL files included in this repository.
 
--- Enable RLS
-alter table bookmarks enable row level security;
+To set up Supabase:
 
--- Policies
-create policy "Users can view own bookmarks" on bookmarks
-  for select using (auth.uid() = user_id);
+1. Create a new Supabase project.
+2. Open the **SQL Editor** in the Supabase dashboard.
+3. Run the SQL files in the following order:
+   - `supabase/schema.sql`
+   - `supabase/rls.sql`
+   - `supabase/realtime.sql`
+4. Enable **Google OAuth** in **Supabase Auth → Providers**.
+5. Configure OAuth redirect URLs for both local development and production (Vercel).
 
-create policy "Users can insert own bookmarks" on bookmarks
-  for insert with check (auth.uid() = user_id);
-
-create policy "Users can delete own bookmarks" on bookmarks
-  for delete using (auth.uid() = user_id);
-
--- Enable Realtime
-alter publication supabase_realtime add table bookmarks;
-```
+After completing these steps, the database, security policies, and Realtime subscriptions will be ready for the application.
 
 ### 4. Run Locally
 ```bash
@@ -99,7 +86,7 @@ Visit `http://localhost:3000`.
 ### Security
 - **RLS:** Database policies strictly enforce that users can only modify their own rows.
 - **Middleware:** Protects the `/bookmarks` route and handles auth redirection.
-- **Input Validation:** Server Actions validate URLs and block SSRF attempts (e.g., localhost, private IPs).
+- **Input Validation:** Server Actions validate URLs and prevent unsafe targets (e.g., localhost or private IP addresses).
 
 ## 🐛 Problems Faced & What I Learned
 
