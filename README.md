@@ -88,7 +88,53 @@ Visit `http://localhost:3000`.
 - **Middleware:** Protects the `/bookmarks` route and handles auth redirection.
 - **Input Validation:** Server Actions validate URLs and prevent unsafe targets (e.g., localhost or private IP addresses).
 
-## 🐛 Problems Faced & What I Learned
+## 📂 Project Structure
+
+A high-level overview of the App Router structure and key directories.
+
+```bash
+├── actions/                  # Server Actions (mutations)
+│   ├── auth.ts              # Login/Logout logic
+│   └── bookmarks.ts         # Create/Delete bookmark logic with validation
+├── app/                      # Next.js App Router
+│   ├── (auth)/               # Route Group: Public authentication pages
+│   │   └── login/page.tsx   # Login page
+│   ├── (protected)/          # Route Group: Authenticated dashboard
+│   │   ├── bookmarks/       # Main bookmark list page
+│   │   │   └── page.tsx     # Server Component (fetches initial data)
+│   │   └── layout.tsx       # Protected layout (header, session check)
+│   ├── auth/callback/        # OAuth callback route
+│   │   └── route.ts         # Exchanges code for session
+│   ├── layout.tsx           # Root layout (Html, Body, Providers)
+│   └── page.tsx             # Root redirect (home -> login)
+├── components/               # React Components
+│   ├── bookmarks/           # Feature components (BookmarkList, Form, Item)
+│   ├── ui/                  # Reusable shadcn/ui primitives (Button, Card, Input)
+│   ├── protected-header.tsx # Header with user profile & logout
+│   └── theme-toggle.tsx     # Dark mode switcher
+├── hooks/
+│   └── useAuth.ts           # Custom hook for client-side session state
+├── lib/
+│   ├── supabase/            # Supabase Clients
+│   │   ├── client.ts        # Browser Client (for Client Components)
+│   │   ├── server.ts        # Server Client (for Server Components/Actions)
+│   │   └── middleware.ts    # Middleware Client (for route protection)
+│   └── utils.ts             # Tailwind class merging utility
+├── supabase/                 # Database Configuration
+│   └── migrations/          # SQL migration files
+├── types/
+│   └── bookmark.ts          # TypeScript interfaces
+├── middleware.ts             # Edge Middleware for auth protection
+└── tailwind.config.ts        # Tailwind configuration
+```
+
+### Key Concepts
+
+- **`(protected)` Route Group**: Files in this folder don't affect the URL path (e.g., `app/(protected)/bookmarks` is accessible at `/bookmarks`), but they share a layout that enforces authentication.
+- **Server Actions (`actions/`)**: Asynchronous functions that run on the server. They are called directly from Client Components (like `BookmarkForm`) to handle data mutations securely.
+- **Supabase Clients (`lib/supabase/`)**: We use three different clients depending on the context (Server, Client, or Middleware) to handle cookies and sessions correctly in the App Router.
+
+## �🐛 Problems Faced & What I Learned
 
 - **Duplicate bookmarks appearing**
   - While adding bookmarks, I noticed that sometimes the same bookmark appeared twice, especially when multiple tabs were open.
